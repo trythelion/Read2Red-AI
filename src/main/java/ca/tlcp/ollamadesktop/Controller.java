@@ -70,11 +70,14 @@ public class Controller implements Initializable {
         }
         input.clear();
         bbar.setDisable(true);
-        output.setText("Running " + models.getSelectionModel().getSelectedItem());
+        models.setDisable(true);
+        output.setText("Running " + models.getSelectionModel().getSelectedItem() + " AI");
         TimerTask task = new TimerTask() {
             public void run() {
                 try {
                     runAI(prompt);
+                    bbar.setDisable(false);
+                    models.setDisable(false);
                 } catch (OllamaBaseException | IOException | InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -85,15 +88,13 @@ public class Controller implements Initializable {
     }
 
     private void runAI(String input) throws OllamaBaseException, IOException, InterruptedException {
-        String prompt = "Do your job with the following passage. output what is expected of you. \n" +  input;
+        String prompt = "Do your job with the following passage.You are restricted to makeing the modifications only to the word \"read\".\n" +  input;
         if (files != null) {
             result = App.AI_API.generateWithImageFiles(models.getSelectionModel().getSelectedItem(), prompt, files, new OptionsBuilder().build());
         } else {
             result = App.AI_API.generate(models.getSelectionModel().getSelectedItem(), prompt , new OptionsBuilder().build());
         }
-        output.setText(result.getResponse());
-
-        bbar.setDisable(false);
+        output.setText("Prompt: " + input + "\n AI Output: " + result.getResponse());
     }
 
 }
