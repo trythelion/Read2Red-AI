@@ -94,8 +94,7 @@ Additional input/output examples FORMATTED <SAMPLE INPUT IN QUOTES> → <EXAMPLE
 
 “I read the ingredients on food labels to make healthier choices.” → “I red the ingredients on food labels to make healthier choices.”
 
-“She read the letter with tears in her eyes.”
-→ “She red the letter with tears in her eyes.”
+“She read the letter with tears in her eyes.” → “She red the letter with tears in her eyes.”
 
 “We read the warning signs but decided to proceed anyway.” → “We red the warning signs but decided to proceed anyway.”
 
